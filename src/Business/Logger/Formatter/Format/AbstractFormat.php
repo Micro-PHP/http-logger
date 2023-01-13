@@ -11,10 +11,9 @@ declare(strict_types=1);
  *  file that was distributed with this source code.
  */
 
-namespace Micro\Plugin\Http\Business\Formatter\Format;
+namespace Micro\Plugin\Http\Business\Logger\Formatter\Format;
 
-use Micro\Plugin\Http\Business\Formatter\LogFormatterInterface;
-use Micro\Plugin\Http\Exception\HttpException;
+use Micro\Plugin\Http\Business\Logger\Formatter\LogFormatterInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -28,7 +27,7 @@ abstract class AbstractFormat implements LogFormatterInterface
     ) {
     }
 
-    public function format(Request $request, Response|null $response, ?HttpException $exception): string
+    public function format(Request $request, Response|null $response, ?\Throwable $exception): string
     {
         $var = '{{'.$this->getVarName().'}}';
 
@@ -43,7 +42,7 @@ abstract class AbstractFormat implements LogFormatterInterface
         );
     }
 
-    abstract protected function getVarValue(Request $request, Response $response, ?HttpException $exception): string;
+    abstract protected function getVarValue(Request $request, Response|null $response, ?\Throwable $exception): string;
 
     abstract protected function getVarName(): string;
 }

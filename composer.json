@@ -1,7 +1,14 @@
 {
     "name": "micro/plugin-http-logger",
     "description": "Micro Framework: ROuter actions logger",
+    "license": "MIT",
     "type": "micro-plugin",
+    "authors": [
+        {
+            "name": "Stanislau Komar",
+            "email": "kost@micro-php.net"
+        }
+    ],
     "require": {
         "micro/http-core": "^1",
         "micro/plugin-logger-core": "^1"
@@ -14,7 +21,6 @@
         "phpunit/phpunit": "^9.5",
         "vimeo/psalm": "^5.2"
     },
-    "license": "MIT",
     "autoload": {
         "psr-4": {
             "Micro\\Plugin\\Http\\": "src/"
@@ -26,12 +32,6 @@
         },
         "sort-packages": true
     },
-    "authors": [
-        {
-            "name": "Stanislau Komar",
-            "email": "kost@micro-php.net"
-        }
-    ],
     "scripts": {
         "coverage": "XDEBUG_MODE=coverage ./vendor/bin/phpunit --coverage-text",
         "php-cs-fix": "./vendor/bin/php-cs-fixer fix --verbose --using-cache=no",

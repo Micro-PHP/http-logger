@@ -11,9 +11,8 @@ declare(strict_types=1);
  *  file that was distributed with this source code.
  */
 
-namespace Micro\Plugin\Http\Business\Formatter\Format;
+namespace Micro\Plugin\Http\Business\Logger\Formatter\Format;
 
-use Micro\Plugin\Http\Exception\HttpException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -22,9 +21,9 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class RequestBodyFormat extends AbstractFormat
 {
-    protected function getVarValue(Request $request, Response|null $response, ?HttpException $exception): string
+    protected function getVarValue(Request $request, Response|null $response, ?\Throwable $exception): string
     {
-        $type = $request->headers->get('Content-Type');
+        $type = (string) $request->headers->get('Content-Type');
 
         switch ($type) {
             case 'application/EDI-X12':
@@ -71,7 +70,7 @@ class RequestBodyFormat extends AbstractFormat
             case 'multipart/related':
                 return sprintf('~Multipart %s~', $this->getTypeFrontName($type));
             default:
-                return (string) $request->getContent();
+                return $request->getContent();
         }
     }
 

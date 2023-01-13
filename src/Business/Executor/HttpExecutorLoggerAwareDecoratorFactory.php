@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Micro\Plugin\Http\Business\Executor;
 
-use Micro\Plugin\Http\Business\Formatter\LogFormatterFactoryInterface;
+use Micro\Plugin\Http\Business\Logger\Formatter\LogFormatterFactoryInterface;
 use Micro\Plugin\Http\PluginHttpLoggerConfigurationInterface;
 use Micro\Plugin\Logger\LoggerFacadeInterface;
 

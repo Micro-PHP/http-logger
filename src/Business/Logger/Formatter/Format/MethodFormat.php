@@ -11,20 +11,23 @@ declare(strict_types=1);
  *  file that was distributed with this source code.
  */
 
-namespace Micro\Plugin\Http\Business\Formatter;
+namespace Micro\Plugin\Http\Business\Logger\Formatter\Format;
 
-use Micro\Plugin\Http\Exception\HttpException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @author Stanislau Komar <kost@micro-php.net>
  */
-interface LogFormatterInterface
+class MethodFormat extends AbstractFormat
 {
-    public function format(
-        Request $request,
-        Response|null $response,
-        HttpException|null $exception
-    ): string;
+    protected function getVarValue(Request $request, Response|null $response, ?\Throwable $exception): string
+    {
+        return $request->getMethod();
+    }
+
+    protected function getVarName(): string
+    {
+        return 'request_method';
+    }
 }

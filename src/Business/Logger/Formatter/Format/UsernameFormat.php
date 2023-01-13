@@ -11,24 +11,23 @@ declare(strict_types=1);
  *  file that was distributed with this source code.
  */
 
-namespace Micro\Plugin\Http\Business\Formatter\Format;
+namespace Micro\Plugin\Http\Business\Logger\Formatter\Format;
 
-use Micro\Plugin\Http\Exception\HttpException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @author Stanislau Komar <kost@micro-php.net>
  */
-class IpFormat extends AbstractFormat
+class UsernameFormat extends AbstractFormat
 {
-    protected function getVarValue(Request $request, Response|null $response, ?HttpException $exception): string
+    protected function getVarValue(Request $request, Response|null $response, ?\Throwable $exception): string
     {
-        return $request->getClientIp();
+        return $request->getUser() ?? '';
     }
 
     protected function getVarName(): string
     {
-        return 'remote_addr';
+        return 'remote_user';
     }
 }

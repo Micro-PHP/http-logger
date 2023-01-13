@@ -13,8 +13,7 @@ declare(strict_types=1);
 
 namespace Micro\Plugin\Http\Business\Executor;
 
-use Micro\Plugin\Http\Business\Formatter\LogFormatterInterface;
-use Micro\Plugin\Http\Exception\HttpException;
+use Micro\Plugin\Http\Business\Logger\Formatter\LogFormatterInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -42,24 +41,19 @@ readonly class HttpExecutorLoggerAwareDecorator implements RouteExecutorInterfac
         $exception = null;
         try {
             $response = $this->decorated->execute($request, $flush);
-        } catch (HttpException $httpException) {
-            $exception = $httpException;
         } catch (\Throwable $throwable) {
             $exception = $throwable;
+            $this->loggerError->critical(
+                $this->logErrorFormatter->format($request, $response, $exception)
+            );
+
+            throw $exception;
         } finally {
             $this->loggerAccess->info(
                 $this->logAccessFormatter->format($request, $response, $exception)
             );
-
-            if ($exception) {
-                $this->loggerError->critical(
-                    $this->logErrorFormatter->format($request, $response, $exception)
-                );
-
-                throw $exception;
-            }
-
-            return $response;
         }
+
+        return $response;
     }
 }

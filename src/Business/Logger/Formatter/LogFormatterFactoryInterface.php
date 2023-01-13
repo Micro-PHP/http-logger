@@ -11,7 +11,7 @@ declare(strict_types=1);
  *  file that was distributed with this source code.
  */
 
-namespace Micro\Plugin\Http\Business\Formatter;
+namespace Micro\Plugin\Http\Business\Logger\Formatter;
 
 /**
  * @author Stanislau Komar <kost@micro-php.net>

@@ -11,9 +11,8 @@ declare(strict_types=1);
  *  file that was distributed with this source code.
  */
 
-namespace Micro\Plugin\Http\Business\Formatter;
+namespace Micro\Plugin\Http\Business\Logger\Formatter;
 
-use Micro\Plugin\Http\Exception\HttpException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -30,7 +29,7 @@ readonly class LogFormatter implements LogFormatterInterface
     ) {
     }
 
-    public function format(Request $request, Response|null $response, ?HttpException $exception): string
+    public function format(Request $request, Response|null $response, ?\Throwable $exception): string
     {
         $message = '';
         foreach ($this->logFormatterCollection as $formatter) {

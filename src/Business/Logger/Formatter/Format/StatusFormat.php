@@ -11,24 +11,31 @@ declare(strict_types=1);
  *  file that was distributed with this source code.
  */
 
-namespace Micro\Plugin\Http\Business\Formatter\Format;
+namespace Micro\Plugin\Http\Business\Logger\Formatter\Format;
 
-use Micro\Plugin\Http\Exception\HttpException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @author Stanislau Komar <kost@micro-php.net>
  */
-class MethodFormat extends AbstractFormat
+class StatusFormat extends AbstractFormat
 {
-    protected function getVarValue(Request $request, Response|null $response, ?HttpException $exception): string
+    protected function getVarValue(Request $request, Response|null $response, ?\Throwable $exception): string
     {
-        return $request->getMethod();
+        if (null !== $response) {
+            return (string) $response->getStatusCode();
+        }
+
+        if ($exception instanceof \Throwable) {
+            return (string) $exception->getCode();
+        }
+
+        return '500';
     }
 
     protected function getVarName(): string
     {
-        return 'request_method';
+        return 'status';
     }
 }

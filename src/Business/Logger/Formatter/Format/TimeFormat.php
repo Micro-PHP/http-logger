@@ -11,24 +11,23 @@ declare(strict_types=1);
  *  file that was distributed with this source code.
  */
 
-namespace Micro\Plugin\Http\Business\Formatter\Format;
+namespace Micro\Plugin\Http\Business\Logger\Formatter\Format;
 
-use Micro\Plugin\Http\Exception\HttpException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @author Stanislau Komar <kost@micro-php.net>
  */
-class HttpRefererFormat extends AbstractFormat
+class TimeFormat extends AbstractFormat
 {
-    protected function getVarValue(Request $request, Response|null $response, ?HttpException $exception): string
+    protected function getVarValue(Request $request, Response|null $response, ?\Throwable $exception): string
     {
-        return $request->headers->get('referer');
+        return (new \DateTime())->format('c');
     }
 
     protected function getVarName(): string
     {
-        return 'http_referer';
+        return 'time';
     }
 }

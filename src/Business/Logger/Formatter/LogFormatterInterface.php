@@ -11,24 +11,19 @@ declare(strict_types=1);
  *  file that was distributed with this source code.
  */
 
-namespace Micro\Plugin\Http\Business\Formatter\Format;
+namespace Micro\Plugin\Http\Business\Logger\Formatter;
 
-use Micro\Plugin\Http\Exception\HttpException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @author Stanislau Komar <kost@micro-php.net>
  */
-class UsernameFormat extends AbstractFormat
+interface LogFormatterInterface
 {
-    protected function getVarValue(Request $request, Response|null $response, ?HttpException $exception): string
-    {
-        return $request->getUser() ?? '';
-    }
-
-    protected function getVarName(): string
-    {
-        return 'remote_user';
-    }
+    public function format(
+        Request $request,
+        Response|null $response,
+        \Throwable|null $exception
+    ): string;
 }
