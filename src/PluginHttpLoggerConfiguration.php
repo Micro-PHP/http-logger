@@ -24,10 +24,10 @@ class PluginHttpLoggerConfiguration extends PluginConfiguration implements Plugi
     public const CFG_LOGGER_ERROR = 'MICRO_HTTP_LOGGER_ERROR';
     public const CFG_DECORATION_WEIGHT = 'MICRO_HTTP_LOGGER_DECORATION_WEIGHT';
 
-    public const CFG_HTTP_LOGGER_ACCESS_FORMAT = '';
-    public const CFG_HTTP_LOGGER_ERROR_FORMAT = '';
-    public const LOGGER_ERROR_FORMAT_DEFAULT = '';
-    public const LOGGER_ACCESS_FORMAT_DEFAULT = '';
+    public const CFG_HTTP_LOGGER_ACCESS_FORMAT = 'MICRO_HTTP_LOGGER_ACCESS_FORMAT';
+    public const CFG_HTTP_LOGGER_ERROR_FORMAT = 'MICRO_HTTP_LOGGER_ERROR_FORMAT';
+    public const LOGGER_ERROR_FORMAT_DEFAULT = '{{remote_addr}} - {{remote_user}} [{{time}}] "{{request}}" {{status}}';
+    public const LOGGER_ACCESS_FORMAT_DEFAULT = '{{remote_addr}} - {{remote_user}} [{{time}}] "{{request}}" {{status}} {{http_referer}} {{http_user_agent}}';
 
     public const DECORATION_DEFAULT = 10;
 
