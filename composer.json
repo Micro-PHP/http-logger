@@ -1,0 +1,54 @@
+{
+    "name": "micro/plugin-http-logger",
+    "description": "Micro Framework: ROuter actions logger",
+    "type": "micro-plugin",
+    "require": {
+        "micro/http-core": "^1",
+        "micro/plugin-logger-core": "^1"
+    },
+    "require-dev": {
+        "ergebnis/composer-normalize": "^2.29",
+        "friendsofphp/php-cs-fixer": "^3.13",
+        "phpstan/phpstan": "^1.9",
+        "phpunit/php-code-coverage": "^9.2",
+        "phpunit/phpunit": "^9.5",
+        "vimeo/psalm": "^5.2"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Micro\\Plugin\\Http\\": "src/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "ergebnis/composer-normalize": true
+        },
+        "sort-packages": true
+    },
+    "authors": [
+        {
+            "name": "Stanislau Komar",
+            "email": "kost@micro-php.net"
+        }
+    ],
+    "scripts": {
+        "coverage": "XDEBUG_MODE=coverage ./vendor/bin/phpunit --coverage-text",
+        "php-cs-fix": "./vendor/bin/php-cs-fixer fix --verbose --using-cache=no",
+        "php-cs-try": "./vendor/bin/php-cs-fixer fix --verbose --dry-run --using-cache=no",
+        "phpstan": "./vendor/bin/phpstan analyze --no-progress",
+        "phpunit": "./vendor/bin/phpunit",
+        "psalm": "./vendor/bin/psalm --no-progress --show-info=true",
+        "statics": [
+            "@phpstan",
+            "@psalm",
+            "@php-cs-try"
+        ],
+        "test": [
+            "@statics",
+            "composer validate --strict",
+            "composer normalize",
+            "@coverage"
+        ]
+    }
+}
