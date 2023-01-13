@@ -38,19 +38,17 @@ readonly class HttpExecutorLoggerAwareDecorator implements RouteExecutorInterfac
     public function execute(Request $request, bool $flush = true): Response
     {
         $response = null;
-        $exception = null;
         try {
             $response = $this->decorated->execute($request, $flush);
         } catch (\Throwable $throwable) {
-            $exception = $throwable;
             $this->loggerError->critical(
-                $this->logErrorFormatter->format($request, $response, $exception)
+                $this->logErrorFormatter->format($request, $response, $throwable)
             );
 
-            throw $exception;
+            throw $throwable;
         } finally {
             $this->loggerAccess->info(
-                $this->logAccessFormatter->format($request, $response, $exception)
+                $this->logAccessFormatter->format($request, $response, null)
             );
         }
 
