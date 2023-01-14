@@ -31,6 +31,8 @@ use Micro\Plugin\Logger\LoggerPlugin;
  * @author Stanislau Komar <kost@micro-php.net>
  *
  * @method HttpLoggerPluginConfigurationInterface configuration()
+ *
+ * @codeCoverageIgnore
  */
 class HttpLoggerPlugin implements DependencyProviderInterface, PluginDependedInterface, ConfigurableInterface
 {

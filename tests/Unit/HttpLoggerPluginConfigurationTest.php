@@ -9,9 +9,11 @@
  *  file that was distributed with this source code.
  */
 
-namespace Micro\Plugin\Http;
+namespace Micro\Plugin\Http\Test\Unit;
 
 use Micro\Framework\Kernel\Configuration\ApplicationConfigurationInterface;
+use Micro\Plugin\Http\HttpLoggerPluginConfiguration;
+use Micro\Plugin\Http\HttpLoggerPluginConfigurationInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 

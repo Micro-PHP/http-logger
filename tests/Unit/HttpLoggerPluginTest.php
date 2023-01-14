@@ -9,10 +9,12 @@
  *  file that was distributed with this source code.
  */
 
-namespace Micro\Plugin\Http;
+namespace Micro\Plugin\Http\Test\Unit;
 
 use Micro\Component\DependencyInjection\Container;
 use Micro\Framework\Kernel\Plugin\DependencyProviderInterface;
+use Micro\Plugin\Http\HttpCorePlugin;
+use Micro\Plugin\Http\HttpLoggerPlugin;
 use Micro\Plugin\Logger\LoggerPlugin;
 use PHPUnit\Framework\TestCase;
 

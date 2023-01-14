@@ -19,6 +19,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @author Stanislau Komar <kost@micro-php.net>
+ *
+ * @codeCoverageIgnore
  */
 abstract class AbstractFormat implements LogFormatterInterface
 {

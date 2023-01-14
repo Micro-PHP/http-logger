@@ -9,7 +9,9 @@
  *  file that was distributed with this source code.
  */
 
-namespace Micro\Plugin\Http\Business\Logger\Formatter\Format;
+namespace Micro\Plugin\Http\Test\Unit\Business\Logger\Formatter\Format;
+
+use Micro\Plugin\Http\Business\Logger\Formatter\Format\MethodFormat;
 
 class MethodFormatTest extends AbstractFormatTest
 {
@@ -21,5 +23,10 @@ class MethodFormatTest extends AbstractFormatTest
     public function getVariable(): string
     {
         return 'request_method';
+    }
+
+    public function assertResult(mixed $object, mixed $result)
+    {
+        $this->assertEquals('GET', $result);
     }
 }

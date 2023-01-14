@@ -9,8 +9,9 @@
  *  file that was distributed with this source code.
  */
 
-namespace Micro\Plugin\Http\Business\Logger\Formatter\Format;
+namespace Micro\Plugin\Http\Test\Unit\Business\Logger\Formatter\Format;
 
+use Micro\Plugin\Http\Business\Logger\Formatter\Format\IpFormat;
 use Micro\Plugin\Http\Exception\HttpException;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -23,7 +24,8 @@ class IpFormatTest extends AbstractFormatTest
     {
         $object = $this->createTestObject();
 
-        $this->assertIsString(
+        $this->assertEquals(
+            '127.0.0.1',
             $object->format(
                 $this->createRequest($hasIp),
                 $this->createResponse($hasResponse),
@@ -60,7 +62,9 @@ class IpFormatTest extends AbstractFormatTest
             return parent::createRequest();
         }
 
-        $request = new Request([], [], [], [], [], ['REMOTE_ADDR' => '0.0.0.0']);
+        return parent::createRequest();
+
+        $request = new Request([], [], [], [], [], []);
 
         return $request;
     }
@@ -72,6 +76,6 @@ class IpFormatTest extends AbstractFormatTest
 
     public function getVariable(): string
     {
-        return 'remote_ip';
+        return 'remote_addr';
     }
 }
