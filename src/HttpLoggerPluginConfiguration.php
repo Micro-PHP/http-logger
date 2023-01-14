@@ -18,7 +18,7 @@ use Micro\Framework\Kernel\Configuration\PluginConfiguration;
 /**
  * @author Stanislau Komar <kost@micro-php.net>
  */
-class PluginHttpLoggerConfiguration extends PluginConfiguration implements PluginHttpLoggerConfigurationInterface
+class HttpLoggerPluginConfiguration extends PluginConfiguration implements HttpLoggerPluginConfigurationInterface
 {
     public const CFG_LOGGER_ACCESS = 'MICRO_HTTP_LOGGER_ACCESS';
     public const CFG_LOGGER_ERROR = 'MICRO_HTTP_LOGGER_ERROR';

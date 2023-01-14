@@ -18,19 +18,19 @@
 
         <UnnecessaryVarAnnotation>
             <errorLevel type="suppress">
-                <file name="src/PluginHttpLogger.php"/>
+                <file name="src/HttpLoggerPlugin.php"/>
             </errorLevel>
         </UnnecessaryVarAnnotation>
 
         <MissingConstructor>
             <errorLevel type="suppress">
-                <file name="src/PluginHttpLogger.php"/>
+                <file name="src/HttpLoggerPlugin.php"/>
             </errorLevel>
         </MissingConstructor>
 
         <ImplementedReturnTypeMismatch>
             <errorLevel type="suppress">
-                <file name="src/PluginHttpLogger.php"/>
+                <file name="src/HttpLoggerPlugin.php"/>
             </errorLevel>
         </ImplementedReturnTypeMismatch>
     </issueHandlers>

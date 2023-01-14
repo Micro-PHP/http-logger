@@ -55,6 +55,6 @@ readonly class HttpFacadeLoggerDecorator implements HttpFacadeInterface
 
     public function match(Request $request): RouteInterface
     {
-        return $this->match($request);
+        return $this->decorated->match($request);
     }
 }

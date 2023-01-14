@@ -30,9 +30,9 @@ use Micro\Plugin\Logger\LoggerPlugin;
 /**
  * @author Stanislau Komar <kost@micro-php.net>
  *
- * @method PluginHttpLoggerConfigurationInterface configuration()
+ * @method HttpLoggerPluginConfigurationInterface configuration()
  */
-class PluginHttpLogger implements DependencyProviderInterface, PluginDependedInterface, ConfigurableInterface
+class HttpLoggerPlugin implements DependencyProviderInterface, PluginDependedInterface, ConfigurableInterface
 {
     use PluginConfigurationTrait;
     private HttpFacadeInterface $httpFacade;

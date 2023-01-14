@@ -16,7 +16,7 @@ namespace Micro\Plugin\Http;
 /**
  * @author Stanislau Komar <kost@micro-php.net>
  */
-interface PluginHttpLoggerConfigurationInterface
+interface HttpLoggerPluginConfigurationInterface
 {
     public function getAccessLoggerName(): string|null;
 

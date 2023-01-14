@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Micro\Plugin\Http\Business\Executor;
 
 use Micro\Plugin\Http\Business\Logger\Formatter\LogFormatterFactoryInterface;
-use Micro\Plugin\Http\PluginHttpLoggerConfigurationInterface;
+use Micro\Plugin\Http\HttpLoggerPluginConfigurationInterface;
 use Micro\Plugin\Logger\LoggerFacadeInterface;
 
 /**
@@ -26,7 +26,7 @@ readonly class HttpExecutorLoggerAwareDecoratorFactory implements RouteExecutorF
         private RouteExecutorInterface $decorated,
         private LoggerFacadeInterface $loggerFacade,
         private LogFormatterFactoryInterface $logFormatterFactory,
-        private PluginHttpLoggerConfigurationInterface $configuration
+        private HttpLoggerPluginConfigurationInterface $configuration
     ) {
     }
 
