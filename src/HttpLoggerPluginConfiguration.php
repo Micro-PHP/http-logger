@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Micro\Plugin\Http;
 
 use Micro\Framework\Kernel\Configuration\PluginConfiguration;
+use Micro\Plugin\Logger\LoggerPluginConfiguration;
 
 /**
  * @author Stanislau Komar <kost@micro-php.net>
@@ -31,14 +32,14 @@ class HttpLoggerPluginConfiguration extends PluginConfiguration implements HttpL
 
     public const DECORATION_DEFAULT = 10;
 
-    public function getAccessLoggerName(): string|null
+    public function getAccessLoggerName(): string
     {
-        return $this->configuration->get(self::CFG_LOGGER_ACCESS);
+        return (string) $this->configuration->get(self::CFG_LOGGER_ACCESS, LoggerPluginConfiguration::LOGGER_NAME_DEFAULT);
     }
 
-    public function getErrorLoggerName(): string|null
+    public function getErrorLoggerName(): string
     {
-        return $this->configuration->get(self::CFG_LOGGER_ERROR);
+        return (string) $this->configuration->get(self::CFG_LOGGER_ERROR, LoggerPluginConfiguration::LOGGER_NAME_DEFAULT);
     }
 
     public function getWeight(): int

@@ -24,7 +24,7 @@ use Micro\Plugin\Http\Business\Logger\Formatter\LogFormatterFactory;
 use Micro\Plugin\Http\Business\Logger\Formatter\LogFormatterFactoryInterface;
 use Micro\Plugin\Http\Decorator\HttpFacadeLoggerDecorator;
 use Micro\Plugin\Http\Facade\HttpFacadeInterface;
-use Micro\Plugin\Logger\LoggerFacadeInterface;
+use Micro\Plugin\Logger\Facade\LoggerFacadeInterface;
 use Micro\Plugin\Logger\LoggerPlugin;
 
 /**

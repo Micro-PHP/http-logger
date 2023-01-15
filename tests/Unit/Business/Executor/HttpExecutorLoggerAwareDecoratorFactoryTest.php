@@ -16,7 +16,7 @@ use Micro\Plugin\Http\Business\Executor\RouteExecutorInterface;
 use Micro\Plugin\Http\Business\Logger\Formatter\LogFormatterFactoryInterface;
 use Micro\Plugin\Http\Facade\HttpFacadeInterface;
 use Micro\Plugin\Http\HttpLoggerPluginConfigurationInterface;
-use Micro\Plugin\Logger\LoggerFacadeInterface;
+use Micro\Plugin\Logger\Facade\LoggerFacadeInterface;
 use PHPUnit\Framework\TestCase;
 
 class HttpExecutorLoggerAwareDecoratorFactoryTest extends TestCase

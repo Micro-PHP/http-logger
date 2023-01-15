@@ -14,6 +14,7 @@ namespace Micro\Plugin\Http\Test\Unit;
 use Micro\Framework\Kernel\Configuration\ApplicationConfigurationInterface;
 use Micro\Plugin\Http\HttpLoggerPluginConfiguration;
 use Micro\Plugin\Http\HttpLoggerPluginConfigurationInterface;
+use Micro\Plugin\Logger\LoggerPluginConfiguration;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -56,9 +57,9 @@ class HttpLoggerPluginConfigurationTest extends TestCase
             ->expects($this->once())
             ->method('get')
             ->with(HttpLoggerPluginConfiguration::CFG_LOGGER_ACCESS)
-            ->willReturn(null);
+            ->willReturn(LoggerPluginConfiguration::LOGGER_NAME_DEFAULT);
 
-        $this->assertNull($this->loggerConfiguration->getAccessLoggerName());
+        $this->assertEquals(LoggerPluginConfiguration::LOGGER_NAME_DEFAULT, $this->loggerConfiguration->getAccessLoggerName());
     }
 
     public function testGetAccessLogFormat()
@@ -74,6 +75,12 @@ class HttpLoggerPluginConfigurationTest extends TestCase
 
     public function testGetErrorLoggerName()
     {
-        $this->assertNull($this->loggerConfiguration->getErrorLoggerName());
+        $this->applicationConfiguration
+            ->expects($this->once())
+            ->method('get')
+            ->with(HttpLoggerPluginConfiguration::CFG_LOGGER_ERROR)
+            ->willReturn(LoggerPluginConfiguration::LOGGER_NAME_DEFAULT);
+
+        $this->assertEquals(LoggerPluginConfiguration::LOGGER_NAME_DEFAULT, $this->loggerConfiguration->getErrorLoggerName());
     }
 }

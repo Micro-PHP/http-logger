@@ -18,9 +18,9 @@ namespace Micro\Plugin\Http;
  */
 interface HttpLoggerPluginConfigurationInterface
 {
-    public function getAccessLoggerName(): string|null;
+    public function getAccessLoggerName(): string;
 
-    public function getErrorLoggerName(): string|null;
+    public function getErrorLoggerName(): string;
 
     public function getErrorLogFormat(): string;
 
