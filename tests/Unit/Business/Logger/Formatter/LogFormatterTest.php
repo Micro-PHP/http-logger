@@ -37,7 +37,8 @@ class LogFormatterTest extends TestCase
         ;
 
         $formatter = new LogFormatter(
-            [$implFormatter]
+            [$implFormatter],
+            'test {{template}}'
         );
 
         $this->assertEquals('test', $formatter->format($request, $response, $exception));

@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Micro\Plugin\Http\Business\Logger\Formatter\Format;
 
-use Micro\Plugin\Http\Business\Logger\Formatter\LogFormatterInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -22,25 +21,24 @@ use Symfony\Component\HttpFoundation\Response;
  *
  * @codeCoverageIgnore
  */
-abstract class AbstractFormat implements LogFormatterInterface
+abstract class AbstractFormat implements LogFormatterConcreteInterface
 {
-    public function __construct(
-        private readonly string $formatString
-    ) {
-    }
-
-    public function format(Request $request, Response|null $response, ?\Throwable $exception): string
+    public function format(Request $request, Response|null $response, ?\Throwable $exception, ?string $message = null): string
     {
+        if (!$message) {
+            return '';
+        }
+
         $var = '{{'.$this->getVarName().'}}';
 
-        if (!str_contains($this->formatString, $var)) {
-            return $this->formatString;
+        if (!str_contains($message, $var)) {
+            return $message;
         }
 
         return str_ireplace(
             $var,
-            $this->formatString,
-            $this->getVarValue($request, $response, $exception)
+            $this->getVarValue($request, $response, $exception),
+            $message
         );
     }
 

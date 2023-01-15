@@ -25,8 +25,8 @@ class MethodFormatTest extends AbstractFormatTest
         return 'request_method';
     }
 
-    public function assertResult(mixed $object, mixed $result)
+    protected function getAcceptedValue()
     {
-        $this->assertEquals('GET', $result);
+        return 'hello - GET';
     }
 }

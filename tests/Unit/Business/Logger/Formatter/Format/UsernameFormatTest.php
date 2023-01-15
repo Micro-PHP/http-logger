@@ -27,6 +27,6 @@ class UsernameFormatTest extends AbstractFormatTest
 
     public function assertResult(mixed $object, mixed $result)
     {
-        $this->assertEquals('', $result);
+        $this->assertEquals('hello - ', $result);
     }
 }
