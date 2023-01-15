@@ -30,24 +30,17 @@ class LogFormatterFactory implements LogFormatterFactoryInterface
     public function create(string $format): LogFormatterInterface
     {
         return new LogFormatter(
-            $this->createLogFormatters($format)
+            [
+                new HttpRefererFormat(),
+                new IpFormat(),
+                new MethodFormat(),
+                new RequestBodyFormat(),
+                new RequestFormat(),
+                new StatusFormat(),
+                new TimeFormat(),
+                new UsernameFormat(),
+            ],
+            $format
         );
-    }
-
-    /**
-     * @return iterable<LogFormatterInterface>
-     */
-    protected function createLogFormatters(string $format): iterable
-    {
-        return [
-            new HttpRefererFormat($format),
-            new IpFormat($format),
-            new MethodFormat($format),
-            new RequestBodyFormat($format),
-            new RequestFormat($format),
-            new StatusFormat($format),
-            new TimeFormat($format),
-            new UsernameFormat($format),
-        ];
     }
 }

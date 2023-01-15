@@ -25,11 +25,12 @@ class IpFormatTest extends AbstractFormatTest
         $object = $this->createTestObject();
 
         $this->assertEquals(
-            '127.0.0.1',
+            'hello - '.($hasIp ? '127.0.0.1' : ''),
             $object->format(
                 $this->createRequest($hasIp),
                 $this->createResponse($hasResponse),
-                $this->createThrowable($throwable)
+                $this->createThrowable($throwable),
+                $this->getFormattedVariable()
             )
         );
     }
@@ -59,14 +60,10 @@ class IpFormatTest extends AbstractFormatTest
     protected function createRequest(bool $hasIp = null): Request
     {
         if (!$hasIp) {
-            return parent::createRequest();
+            return new Request();
         }
 
         return parent::createRequest();
-
-        $request = new Request([], [], [], [], [], []);
-
-        return $request;
     }
 
     protected function getTestClass(): string

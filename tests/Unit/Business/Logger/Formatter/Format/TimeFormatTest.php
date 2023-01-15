@@ -27,6 +27,10 @@ class TimeFormatTest extends AbstractFormatTest
 
     public function assertResult(mixed $object, mixed $result)
     {
+        $this->assertStringContainsString('hello - ', $result);
+
+        $result = str_replace('hello - ', '', $result);
+
         $date = new \DateTime($result);
 
         $this->assertEquals($result, $date->format('c'));

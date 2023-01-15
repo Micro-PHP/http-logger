@@ -27,7 +27,8 @@ class RequestBodyFormatTest extends AbstractFormatTest
             $object->format(
                 $this->createRequest($contentType),
                 $this->createResponse($hasResponse),
-                $this->createThrowable($throwable)
+                $this->createThrowable($throwable),
+                $this->getFormattedVariable()
             )
         );
     }

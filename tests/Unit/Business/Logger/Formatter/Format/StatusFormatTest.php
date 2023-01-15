@@ -28,7 +28,7 @@ class StatusFormatTest extends AbstractFormatTest
     protected function assertResult(mixed $object, mixed $result)
     {
         $this->assertTrue(
-            \in_array($result, ['500', 0])
+            \in_array($result, ['hello - 500', 'hello - 0'])
         );
     }
 }

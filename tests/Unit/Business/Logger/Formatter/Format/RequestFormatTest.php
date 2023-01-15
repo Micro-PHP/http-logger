@@ -27,6 +27,6 @@ class RequestFormatTest extends AbstractFormatTest
 
     public function assertResult(mixed $object, mixed $result)
     {
-        $this->assertEquals('/test', $result);
+        $this->assertEquals('hello - /test', $result);
     }
 }

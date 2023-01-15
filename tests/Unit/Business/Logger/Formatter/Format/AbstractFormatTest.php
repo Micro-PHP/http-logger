@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Micro\Plugin\Http\Test\Unit\Business\Logger\Formatter\Format;
 
-use Micro\Plugin\Http\Business\Logger\Formatter\LogFormatterInterface;
+use Micro\Plugin\Http\Business\Logger\Formatter\Format\LogFormatterConcreteInterface;
 use Micro\Plugin\Http\Exception\HttpException;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
@@ -36,9 +36,15 @@ abstract class AbstractFormatTest extends TestCase
             $object->format(
                 $this->createRequest(),
                 $this->createResponse($hasResponse),
-                $this->createThrowable($throwable)
+                $this->createThrowable($throwable),
+                $this->getFormattedVariable()
             )
         );
+    }
+
+    protected function getAcceptedValue()
+    {
+        return 'hello - '.$this->getVariable();
     }
 
     public function dataProvider()
@@ -56,7 +62,7 @@ abstract class AbstractFormatTest extends TestCase
     protected function assertResult(mixed $object, mixed $result)
     {
         $this->assertEquals(
-            $this->getVariable(),
+            $this->getAcceptedValue(),
             $result
         );
     }
@@ -82,16 +88,16 @@ abstract class AbstractFormatTest extends TestCase
 
     abstract protected function getTestClass(): string;
 
-    protected function createTestObject(): LogFormatterInterface
+    protected function createTestObject(): LogFormatterConcreteInterface
     {
         $testClass = $this->getTestClass();
 
-        return new $testClass($this->getFormattedVariable());
+        return new $testClass();
     }
 
     protected function getFormattedVariable()
     {
-        return '{{'.$this->getVariable().'}}';
+        return 'hello - {{'.$this->getVariable().'}}';
     }
 
     abstract public function getVariable(): string;

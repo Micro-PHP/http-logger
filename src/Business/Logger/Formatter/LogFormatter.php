@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Micro\Plugin\Http\Business\Logger\Formatter;
 
+use Micro\Plugin\Http\Business\Logger\Formatter\Format\LogFormatterConcreteInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -22,18 +23,19 @@ use Symfony\Component\HttpFoundation\Response;
 readonly class LogFormatter implements LogFormatterInterface
 {
     /**
-     * @param iterable<LogFormatterInterface> $logFormatterCollection
+     * @param iterable<LogFormatterConcreteInterface> $logFormatterCollection
      */
     public function __construct(
-        private iterable $logFormatterCollection
+        private iterable $logFormatterCollection,
+        private string $messageTemplate
     ) {
     }
 
     public function format(Request $request, Response|null $response, ?\Throwable $exception): string
     {
-        $message = '';
+        $message = $this->messageTemplate;
         foreach ($this->logFormatterCollection as $formatter) {
-            $message = $formatter->format($request, $response, $exception);
+            $message = $formatter->format($request, $response, $exception, $message);
         }
 
         return $message;
