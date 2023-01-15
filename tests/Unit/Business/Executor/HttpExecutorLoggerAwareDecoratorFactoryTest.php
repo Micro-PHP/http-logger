@@ -9,12 +9,14 @@
  *  file that was distributed with this source code.
  */
 
-namespace Micro\Plugin\Http\Business\Executor;
+namespace Micro\Plugin\Http\Test\Unit\Business\Executor;
 
+use Micro\Plugin\Http\Business\Executor\HttpExecutorLoggerAwareDecoratorFactory;
+use Micro\Plugin\Http\Business\Executor\RouteExecutorInterface;
 use Micro\Plugin\Http\Business\Logger\Formatter\LogFormatterFactoryInterface;
 use Micro\Plugin\Http\Facade\HttpFacadeInterface;
 use Micro\Plugin\Http\HttpLoggerPluginConfigurationInterface;
-use Micro\Plugin\Logger\LoggerFacadeInterface;
+use Micro\Plugin\Logger\Facade\LoggerFacadeInterface;
 use PHPUnit\Framework\TestCase;
 
 class HttpExecutorLoggerAwareDecoratorFactoryTest extends TestCase

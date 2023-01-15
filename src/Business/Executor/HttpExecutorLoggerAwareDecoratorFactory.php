@@ -15,7 +15,7 @@ namespace Micro\Plugin\Http\Business\Executor;
 
 use Micro\Plugin\Http\Business\Logger\Formatter\LogFormatterFactoryInterface;
 use Micro\Plugin\Http\HttpLoggerPluginConfigurationInterface;
-use Micro\Plugin\Logger\LoggerFacadeInterface;
+use Micro\Plugin\Logger\Facade\LoggerFacadeInterface;
 
 /**
  * @author Stanislau Komar <kost@micro-php.net>

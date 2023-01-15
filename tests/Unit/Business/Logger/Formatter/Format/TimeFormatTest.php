@@ -9,7 +9,9 @@
  *  file that was distributed with this source code.
  */
 
-namespace Micro\Plugin\Http\Business\Logger\Formatter\Format;
+namespace Micro\Plugin\Http\Test\Unit\Business\Logger\Formatter\Format;
+
+use Micro\Plugin\Http\Business\Logger\Formatter\Format\TimeFormat;
 
 class TimeFormatTest extends AbstractFormatTest
 {
@@ -21,5 +23,12 @@ class TimeFormatTest extends AbstractFormatTest
     public function getVariable(): string
     {
         return 'time';
+    }
+
+    public function assertResult(mixed $object, mixed $result)
+    {
+        $date = new \DateTime($result);
+
+        $this->assertEquals($result, $date->format('c'));
     }
 }

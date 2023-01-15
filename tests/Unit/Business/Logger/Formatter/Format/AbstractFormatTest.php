@@ -11,7 +11,7 @@ declare(strict_types=1);
  *  file that was distributed with this source code.
  */
 
-namespace Micro\Plugin\Http\Business\Logger\Formatter\Format;
+namespace Micro\Plugin\Http\Test\Unit\Business\Logger\Formatter\Format;
 
 use Micro\Plugin\Http\Business\Logger\Formatter\LogFormatterInterface;
 use Micro\Plugin\Http\Exception\HttpException;
@@ -31,7 +31,8 @@ abstract class AbstractFormatTest extends TestCase
     {
         $object = $this->createTestObject();
 
-        $this->assertIsString(
+        $this->assertResult(
+            $object,
             $object->format(
                 $this->createRequest(),
                 $this->createResponse($hasResponse),
@@ -50,6 +51,14 @@ abstract class AbstractFormatTest extends TestCase
             [true, new \Exception()],
             [false, new \Exception()],
         ];
+    }
+
+    protected function assertResult(mixed $object, mixed $result)
+    {
+        $this->assertEquals(
+            $this->getVariable(),
+            $result
+        );
     }
 
     public function createThrowable(\Throwable|null $throwable): \Throwable|null

@@ -9,8 +9,10 @@
  *  file that was distributed with this source code.
  */
 
-namespace Micro\Plugin\Http\Business\Logger\Formatter;
+namespace Micro\Plugin\Http\Test\Unit\Business\Logger\Formatter;
 
+use Micro\Plugin\Http\Business\Logger\Formatter\LogFormatterFactory;
+use Micro\Plugin\Http\Business\Logger\Formatter\LogFormatterInterface;
 use PHPUnit\Framework\TestCase;
 
 class LogFormatterFactoryTest extends TestCase

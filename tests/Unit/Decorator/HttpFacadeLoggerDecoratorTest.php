@@ -9,11 +9,12 @@
  *  file that was distributed with this source code.
  */
 
-namespace Micro\Plugin\Http\Decorator;
+namespace Micro\Plugin\Http\Test\Unit\Decorator;
 
 use Micro\Plugin\Http\Business\Executor\RouteExecutorFactoryInterface;
 use Micro\Plugin\Http\Business\Route\RouteBuilderInterface;
 use Micro\Plugin\Http\Business\Route\RouteInterface;
+use Micro\Plugin\Http\Decorator\HttpFacadeLoggerDecorator;
 use Micro\Plugin\Http\Facade\HttpFacadeInterface;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;

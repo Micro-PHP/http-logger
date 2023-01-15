@@ -9,8 +9,9 @@
  *  file that was distributed with this source code.
  */
 
-namespace Micro\Plugin\Http\Business\Executor;
+namespace Micro\Plugin\Http\Test\Unit\Business\Executor;
 
+use Micro\Plugin\Http\Business\Executor\HttpExecutorLoggerAwareDecorator;
 use Micro\Plugin\Http\Business\Logger\Formatter\LogFormatterInterface;
 use Micro\Plugin\Http\Exception\HttpException;
 use Micro\Plugin\Http\Facade\HttpFacadeInterface;
