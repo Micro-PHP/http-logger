@@ -10,7 +10,7 @@
         }
     ],
     "require": {
-        "micro/http-core": "^1",
+        "micro/plugin-http-core": "^1",
         "micro/plugin-logger-core": "^1"
     },
     "require-dev": {
