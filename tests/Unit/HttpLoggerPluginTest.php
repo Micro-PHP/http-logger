@@ -12,9 +12,11 @@
 namespace Micro\Plugin\Http\Test\Unit;
 
 use Micro\Component\DependencyInjection\Container;
+use Micro\Framework\Kernel\Configuration\DefaultApplicationConfiguration;
 use Micro\Framework\Kernel\Plugin\DependencyProviderInterface;
 use Micro\Plugin\Http\HttpCorePlugin;
 use Micro\Plugin\Http\HttpLoggerPlugin;
+use Micro\Plugin\Http\HttpLoggerPluginConfiguration;
 use Micro\Plugin\Logger\LoggerPlugin;
 use PHPUnit\Framework\TestCase;
 
@@ -25,6 +27,9 @@ class HttpLoggerPluginTest extends TestCase
     protected function setUp(): void
     {
         $this->plugin = new HttpLoggerPlugin();
+        $this->plugin->setConfiguration(new HttpLoggerPluginConfiguration(
+            new DefaultApplicationConfiguration([])
+        ));
     }
 
     public function testGetDependedPlugins()
@@ -46,7 +51,8 @@ class HttpLoggerPluginTest extends TestCase
         $container = $this->createMock(Container::class);
         $container
             ->expects($this->once())
-            ->method('decorate');
+            ->method('decorate')
+        ;
 
         $this->plugin->provideDependencies($container);
     }

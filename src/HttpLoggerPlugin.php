@@ -58,7 +58,8 @@ class HttpLoggerPlugin implements DependencyProviderInterface, PluginDependedInt
             $this->loggerFacade = $loggerFacade;
 
             return $this->createDecorator();
-        });
+        }, $this->configuration()->getWeight()
+        );
     }
 
     protected function createDecorator(): HttpFacadeInterface
