@@ -26,5 +26,10 @@ interface HttpLoggerPluginConfigurationInterface
 
     public function getAccessLogFormat(): string;
 
+    /**
+     * @return string[]
+     */
+    public function getRequestHeadersSecuredList(): array;
+
     public function getWeight(): int;
 }

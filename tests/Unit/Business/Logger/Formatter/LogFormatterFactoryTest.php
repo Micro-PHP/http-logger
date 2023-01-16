@@ -11,6 +11,7 @@
 
 namespace Micro\Plugin\Http\Test\Unit\Business\Logger\Formatter;
 
+use Micro\Plugin\Http\Business\Logger\Formatter\Format\LogFormatterConcreteInterface;
 use Micro\Plugin\Http\Business\Logger\Formatter\LogFormatterFactory;
 use Micro\Plugin\Http\Business\Logger\Formatter\LogFormatterInterface;
 use PHPUnit\Framework\TestCase;
@@ -19,7 +20,9 @@ class LogFormatterFactoryTest extends TestCase
 {
     public function testCreate()
     {
-        $factory = new LogFormatterFactory();
+        $factory = new LogFormatterFactory([
+            $this->createMock(LogFormatterConcreteInterface::class),
+        ]);
 
         $this->assertInstanceOf(LogFormatterInterface::class, $factory->create('test'));
     }

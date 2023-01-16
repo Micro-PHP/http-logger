@@ -13,33 +13,25 @@ declare(strict_types=1);
 
 namespace Micro\Plugin\Http\Business\Logger\Formatter;
 
-use Micro\Plugin\Http\Business\Logger\Formatter\Format\HttpRefererFormat;
-use Micro\Plugin\Http\Business\Logger\Formatter\Format\IpFormat;
-use Micro\Plugin\Http\Business\Logger\Formatter\Format\MethodFormat;
-use Micro\Plugin\Http\Business\Logger\Formatter\Format\RequestBodyFormat;
-use Micro\Plugin\Http\Business\Logger\Formatter\Format\RequestFormat;
-use Micro\Plugin\Http\Business\Logger\Formatter\Format\StatusFormat;
-use Micro\Plugin\Http\Business\Logger\Formatter\Format\TimeFormat;
-use Micro\Plugin\Http\Business\Logger\Formatter\Format\UsernameFormat;
+use Micro\Plugin\Http\Business\Logger\Formatter\Format\LogFormatterConcreteInterface;
 
 /**
  * @author Stanislau Komar <kost@micro-php.net>
  */
-class LogFormatterFactory implements LogFormatterFactoryInterface
+readonly class LogFormatterFactory implements LogFormatterFactoryInterface
 {
+    /**
+     * @param iterable<LogFormatterConcreteInterface> $logFormatterCollection
+     */
+    public function __construct(
+        private iterable $logFormatterCollection,
+    ) {
+    }
+
     public function create(string $format): LogFormatterInterface
     {
         return new LogFormatter(
-            [
-                new HttpRefererFormat(),
-                new IpFormat(),
-                new MethodFormat(),
-                new RequestBodyFormat(),
-                new RequestFormat(),
-                new StatusFormat(),
-                new TimeFormat(),
-                new UsernameFormat(),
-            ],
+            $this->logFormatterCollection,
             $format
         );
     }

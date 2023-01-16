@@ -20,6 +20,14 @@ use Micro\Framework\Kernel\Plugin\PluginConfigurationTrait;
 use Micro\Framework\Kernel\Plugin\PluginDependedInterface;
 use Micro\Plugin\Http\Business\Executor\HttpExecutorLoggerAwareDecoratorFactory;
 use Micro\Plugin\Http\Business\Executor\RouteExecutorFactoryInterface;
+use Micro\Plugin\Http\Business\Logger\Formatter\Format\HeadersRequestFormatter;
+use Micro\Plugin\Http\Business\Logger\Formatter\Format\IpFormat;
+use Micro\Plugin\Http\Business\Logger\Formatter\Format\MethodFormat;
+use Micro\Plugin\Http\Business\Logger\Formatter\Format\RequestBodyFormat;
+use Micro\Plugin\Http\Business\Logger\Formatter\Format\RequestFormat;
+use Micro\Plugin\Http\Business\Logger\Formatter\Format\StatusFormat;
+use Micro\Plugin\Http\Business\Logger\Formatter\Format\TimeFormat;
+use Micro\Plugin\Http\Business\Logger\Formatter\Format\UsernameFormat;
 use Micro\Plugin\Http\Business\Logger\Formatter\LogFormatterFactory;
 use Micro\Plugin\Http\Business\Logger\Formatter\LogFormatterFactoryInterface;
 use Micro\Plugin\Http\Decorator\HttpFacadeLoggerDecorator;
@@ -73,7 +81,18 @@ class HttpLoggerPlugin implements DependencyProviderInterface, PluginDependedInt
 
     protected function createLogFormatterFactory(): LogFormatterFactoryInterface
     {
-        return new LogFormatterFactory();
+        return new LogFormatterFactory(
+            [
+                new HeadersRequestFormatter($this->configuration()->getRequestHeadersSecuredList()),
+                new IpFormat(),
+                new MethodFormat(),
+                new RequestBodyFormat(),
+                new RequestFormat(),
+                new StatusFormat(),
+                new TimeFormat(),
+                new UsernameFormat(),
+            ]
+        );
     }
 
     public function getDependedPlugins(): iterable
