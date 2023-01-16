@@ -15,6 +15,7 @@ namespace Micro\Plugin\Http\Test\Unit;
 
 use Micro\Component\DependencyInjection\Container;
 use Micro\Framework\Kernel\Plugin\DependencyProviderInterface;
+use Micro\Framework\Kernel\Plugin\PluginConfigurationTrait;
 use Micro\Framework\Kernel\Plugin\PluginDependedInterface;
 use Micro\Plugin\Http\HttpCorePlugin;
 use Micro\Plugin\Logger\LoggerPlugin;
@@ -24,9 +25,10 @@ use Micro\Plugin\Logger\LoggerPlugin;
  */
 class TestHtpLoggerPlugin implements DependencyProviderInterface, PluginDependedInterface
 {
+    use PluginConfigurationTrait;
+
     public function provideDependencies(Container $container): void
     {
-        // TODO: Implement provideDependencies() method.
     }
 
     public function getDependedPlugins(): iterable
