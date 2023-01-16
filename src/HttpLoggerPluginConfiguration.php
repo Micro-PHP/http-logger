@@ -30,7 +30,7 @@ class HttpLoggerPluginConfiguration extends PluginConfiguration implements HttpL
     public const CFG_HTTP_LOGGER_ERROR_FORMAT = 'MICRO_HTTP_LOGGER_ERROR_FORMAT';
     public const LOGGER_ERROR_FORMAT_DEFAULT = '{{remote_addr}} - {{remote_user}} [{{status}}] "{{request}}"';
     public const LOGGER_ACCESS_FORMAT_DEFAULT = '{{remote_addr}} - {{remote_user}} [{{status}}] "{{request}}" {{request_header.http-referer}} {{request_header.user-agent}}';
-    public const DECORATION_DEFAULT = 10;
+    public const DECORATION_DEFAULT = 1000;
 
     public function getAccessLoggerName(): string
     {
