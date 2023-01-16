@@ -23,13 +23,13 @@ class HttpLoggerPluginConfiguration extends PluginConfiguration implements HttpL
 {
     public const CFG_LOGGER_ACCESS = 'MICRO_HTTP_LOGGER_ACCESS';
     public const CFG_LOGGER_ERROR = 'MICRO_HTTP_LOGGER_ERROR';
+    public const CFG_LOGGER_HEADERS_SECURED = 'MICRO_HTTP_LOGGER_HEADERS_SECURED';
+    public const CFG_LOGGER_HEADERS_SECURED_DEFAULT = 'Authorization';
     public const CFG_DECORATION_WEIGHT = 'MICRO_HTTP_LOGGER_DECORATION_WEIGHT';
-
     public const CFG_HTTP_LOGGER_ACCESS_FORMAT = 'MICRO_HTTP_LOGGER_ACCESS_FORMAT';
     public const CFG_HTTP_LOGGER_ERROR_FORMAT = 'MICRO_HTTP_LOGGER_ERROR_FORMAT';
-    public const LOGGER_ERROR_FORMAT_DEFAULT = '{{remote_addr}} - {{remote_user}} [{{time}}] "{{request}}" {{status}}';
-    public const LOGGER_ACCESS_FORMAT_DEFAULT = '{{remote_addr}} - {{remote_user}} [{{time}}] "{{request}}" {{status}} {{http_referer}} {{http_user_agent}}';
-
+    public const LOGGER_ERROR_FORMAT_DEFAULT = '{{remote_addr}} - {{remote_user}} [{{status}}] "{{request}}"';
+    public const LOGGER_ACCESS_FORMAT_DEFAULT = '{{remote_addr}} - {{remote_user}} [{{status}}] "{{request}}" {{request_header.http-referer}} {{request_header.user-agent}}';
     public const DECORATION_DEFAULT = 10;
 
     public function getAccessLoggerName(): string
@@ -55,5 +55,15 @@ class HttpLoggerPluginConfiguration extends PluginConfiguration implements HttpL
     public function getAccessLogFormat(): string
     {
         return $this->configuration->get(self::CFG_HTTP_LOGGER_ACCESS_FORMAT, self::LOGGER_ACCESS_FORMAT_DEFAULT, false);
+    }
+
+    public function getRequestHeadersSecuredList(): array
+    {
+        return $this->explodeStringToArray(
+            $this->configuration->get(
+                self::CFG_LOGGER_HEADERS_SECURED,
+                self::CFG_LOGGER_HEADERS_SECURED_DEFAULT
+            )
+        );
     }
 }

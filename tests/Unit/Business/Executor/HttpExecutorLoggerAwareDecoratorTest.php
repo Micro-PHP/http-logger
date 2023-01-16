@@ -25,19 +25,19 @@ class HttpExecutorLoggerAwareDecoratorTest extends TestCase
     /**
      * @dataProvider dataProvider
      */
-    public function testExecute(bool $isFlush, bool $exceptException)
+    public function testExecute(bool $isFlush, ?\Throwable $throwable)
     {
         $decorator = new HttpExecutorLoggerAwareDecorator(
-            $this->createDecorated($exceptException),
+            $this->createDecorated($throwable),
             $this->createLogger(),
             $this->createLogger(),
             $this->createFormatter(),
             $this->createFormatter()
         );
 
-        if ($exceptException) {
-            $this->expectException(HttpException::class);
-            $this->expectExceptionCode(404);
+        if ($throwable) {
+            $this->expectException(\get_class($throwable));
+            $this->expectExceptionCode($throwable->getCode());
         }
 
         $this->assertInstanceOf(
@@ -53,29 +53,29 @@ class HttpExecutorLoggerAwareDecoratorTest extends TestCase
     {
         return [
             [
-                true, true,
+                true, new HttpException('Hello 500', 500),
             ],
             [
-                false, true,
+                false, new HttpException('Hello 404', 404),
             ],
             [
-                true, false,
+                true, new \Exception('Hello exception'),
             ],
             [
-                false, false,
+                false, null,
             ],
         ];
     }
 
-    protected function createDecorated(bool $throwException)
+    protected function createDecorated(?\Throwable $throwable)
     {
         $decorated = $this->createMock(HttpFacadeInterface::class);
         $methodMock = $decorated
             ->expects($this->once())
             ->method('execute')
         ;
-        if ($throwException) {
-            $methodMock->willThrowException(new HttpException('test', 404));
+        if ($throwable) {
+            $methodMock->willThrowException($throwable);
         } else {
             $methodMock->willReturn(
                 $this->createMock(Response::class)

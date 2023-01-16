@@ -73,6 +73,20 @@ class HttpLoggerPluginConfigurationTest extends TestCase
         $this->assertEquals(HttpLoggerPluginConfiguration::LOGGER_ACCESS_FORMAT_DEFAULT, $this->loggerConfiguration->getAccessLogFormat());
     }
 
+    public function testGetRequestHeadersSecuredList()
+    {
+        $this->applicationConfiguration
+            ->expects($this->once())
+            ->method('get')
+            ->with(HttpLoggerPluginConfiguration::CFG_LOGGER_HEADERS_SECURED)
+            ->willReturn('Authorization');
+
+        $this->assertEquals(
+            ['Authorization'],
+            $this->loggerConfiguration->getRequestHeadersSecuredList()
+        );
+    }
+
     public function testGetErrorLoggerName()
     {
         $this->applicationConfiguration

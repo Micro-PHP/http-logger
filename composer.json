@@ -28,7 +28,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Micro\\Plugin\\Http\\Test\\": "tests/"
+            "Micro\\Plugin\\Http\\Test\\Unit\\": "tests/Unit"
         }
     },
     "config": {
