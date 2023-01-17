@@ -40,7 +40,12 @@ readonly class HttpExecutorLoggerAwareDecorator implements RouteExecutorInterfac
     {
         $response = null;
         try {
-            $response = $this->decorated->execute($request, $flush);
+            $response = $this->decorated->execute($request, false);
+            if ($flush) {
+                $response->send();
+            }
+
+            return $response;
         } catch (HttpException $exception) {
             if ($exception->getCode() >= 500) {
                 $this->loggerError->critical(
@@ -75,7 +80,5 @@ readonly class HttpExecutorLoggerAwareDecorator implements RouteExecutorInterfac
                 $this->logAccessFormatter->format($request, $response, null)
             );
         }
-
-        return $response;
     }
 }
