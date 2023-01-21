@@ -25,53 +25,44 @@ class RequestBodyFormat extends AbstractFormat
     {
         $type = (string) $request->headers->get('Content-Type');
 
-        switch ($type) {
-            case 'application/EDI-X12':
-            case 'application/javascript':
-            case 'application/EDIFACT':
-            case 'application/xhtml+xml':
-                return sprintf('~%s Content~', $this->getTypeFrontName($type));
-            case 'application/zip':
-                return '~ZIP Binary~';
-            case 'application/x-shockwave-flash':
-                return '~FLASH Binary~';
-            case 'application/pdf':
-                return '~PDF Binary~';
-            case 'application/ogg':
-                return 'OGG Binary';
-            case 'audio/mpeg':
-            case 'audio/x-ms-wma':
-            case 'audio/vnd.rn-realaudio':
-            case 'audio/x-wav':
-                return sprintf('~Audio %s content~', $this->getTypeFrontName($type));
-            case 'application/vnd.oasis.opendocument.text':
-            case 'application/vnd.oasis.opendocument.spreadsheet':
-            case 'application/vnd.oasis.opendocument.presentation':
-            case 'application/vnd.oasis.opendocument.graphics':
-            case 'application/vnd.ms-excel':
-            case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
-            case 'application/vnd.ms-powerpoint':
-            case 'application/vnd.openxmlformats-officedocument.presentationml.presentation':
-            case 'application/msword':
-            case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
-            case 'application/vnd.mozilla.xul+xml':
-                return sprintf('~VND %s~', $this->getTypeFrontName($type));
-            case 'video/mpeg':
-            case 'video/mp4':
-            case 'video/quicktime':
-            case 'video/x-ms-wmv':
-            case 'video/x-msvideo':
-            case 'video/x-flv':
-            case 'video/webm':
-                return sprintf('~Video %s~', $this->getTypeFrontName($type));
-            case 'multipart/form-data':
-            case 'multipart/mixed':
-            case 'multipart/alternative':
-            case 'multipart/related':
-                return sprintf('~Multipart %s~', $this->getTypeFrontName($type));
-            default:
-                return $request->getContent();
-        }
+        return match ($type) {
+            'application/EDI-X12', 'application/javascript', 'application/EDIFACT', 'application/xhtml+xml' => sprintf('~%s Content~', $this->getTypeFrontName($type)),
+            'application/zip' => '~ZIP Binary~',
+            'application/x-shockwave-flash' => '~FLASH Binary~',
+            'application/pdf' => '~PDF Binary~',
+            'application/ogg' => 'OGG Binary',
+            'audio/mpeg',
+            'audio/x-ms-wma',
+            'audio/vnd.rn-realaudio',
+            'audio/x-wav' => sprintf('~Audio %s content~', $this->getTypeFrontName($type)),
+
+            'application/vnd.oasis.opendocument.text',
+            'application/vnd.oasis.opendocument.spreadsheet',
+            'application/vnd.oasis.opendocument.presentation',
+            'application/vnd.oasis.opendocument.graphics',
+            'application/vnd.ms-excel',
+            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+            'application/vnd.ms-powerpoint',
+            'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+            'application/msword',
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+            'application/vnd.mozilla.xul+xml' => sprintf('~VND %s~', $this->getTypeFrontName($type)),
+
+            'video/mpeg',
+            'video/mp4',
+            'video/quicktime',
+            'video/x-ms-wmv',
+            'video/x-msvideo',
+            'video/x-flv',
+            'video/webm' => sprintf('~Video %s~', $this->getTypeFrontName($type)),
+
+            'multipart/form-data',
+            'multipart/mixed',
+            'multipart/alternative',
+            'multipart/related' => sprintf('~Multipart %s~', $this->getTypeFrontName($type)),
+
+            default => $request->getContent(),
+        };
     }
 
     protected function getVarName(): string
